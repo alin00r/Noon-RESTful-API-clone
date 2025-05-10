@@ -1,0 +1,33 @@
+### GET All Products
+GET http://localhost:3000/api/products
+
+
+### GET Product By Id
+GET http://localhost:3000/api/products/5
+
+
+
+### Create New Product
+POST http://localhost:3000/api/products
+Content-Type:application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlclR5cGUiOiJub3JtYWxfdXNlciIsImlhdCI6MTc0NTA0NTMyOCwiZXhwIjoxNzQ3NjM3MzI4fQ.jynr-_uOy2C1zKr5L3tl4LDdRPwtJlDDbd12NIsK1Yo
+
+{
+    "title":"product 5",
+    "description":"about programmin",
+    "price":12
+}
+
+
+### Update Product
+PATCH  http://localhost:3000/api/products/1
+Content-Type:application/json
+
+{
+    "title":"product 5",
+    "price":12
+}
+
+
+### Delete Product
+Delete  http://localhost:3000/api/products/1
