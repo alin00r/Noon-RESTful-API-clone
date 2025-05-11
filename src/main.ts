@@ -1,8 +1,8 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import helmet from 'helmet';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
@@ -12,10 +12,14 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+
+  // Apply Middlewares
+  app.use(helmet());
+  // Cors Policy
   app.enableCors({
     origin: 'http://localhost:3000',
   });
-
+  // Swagger
   const swagger = new DocumentBuilder()
     .setTitle('E-commerce API')
     .setDescription('Your API description')
@@ -30,6 +34,7 @@ async function bootstrap() {
   // http:localhost:5000/swagger
   SwaggerModule.setup('swagger', app, documentation);
 
+  // Running the app
   await app.listen(process.env.PORT ?? 5000);
 }
 

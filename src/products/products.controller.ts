@@ -25,6 +25,7 @@ import {
   ApiResponse,
   ApiSecurity,
 } from '@nestjs/swagger';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
 @Controller('api/products')
 export class ProductsController {
@@ -85,6 +86,9 @@ export class ProductsController {
 
   //GET: ~/api/products/:id
   @Get('/:id')
+  @Throttle({
+    default: { limit: 5, ttl: 10000 },
+  })
   public getSingleProducts(@Param('id', ParseIntPipe) id: number) {
     return this.productsService.getOneBy(id);
   }
